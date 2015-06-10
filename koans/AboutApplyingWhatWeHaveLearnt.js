@@ -37,9 +37,20 @@ describe("About Applying What We Have Learnt", function() {
 
   it("given I'm allergic to nuts and hate mushrooms, it should find a pizza I can eat (functional)", function () {
 
-      var productsICanEat = [];
-
       /* solve using filter() & all() / any() */
+
+      var productsICanEat = _.filter(products, function(g){
+        var ingredient = g.ingredients
+        return (g.containsNuts === false && _.some(ingredient, function(m) {
+        if (m.ingredients === "mushrooms") {
+            return false;
+        }
+
+        }));
+
+      });
+
+
 
       expect(productsICanEat.length).toBe(0);
   });
@@ -60,7 +71,14 @@ describe("About Applying What We Have Learnt", function() {
 
   it("should add all the natural numbers below 1000 that are multiples of 3 or 5 (functional)", function () {
 
-    var sum = 233168;    /* try chaining range() and reduce() */
+   var range = _.range(0, 1000, 1);
+
+    var sum = _.reduce(range, function(a, b){
+      if (b % 3 === 0 || b % 5 === 0){
+        return a + b;
+       }
+       return a;
+    });
 
     expect(233168).toBe(233168);
   });
@@ -83,7 +101,7 @@ describe("About Applying What We Have Learnt", function() {
 
     /* chain() together map(), flatten() and reduce() */
 
-    expect(ingredientCount['mushrooms']).toBe(undefined);
+    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
   });
 
   /*********************************************************************************/
